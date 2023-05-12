@@ -1,0 +1,46 @@
+{
+    "data": [
+        {
+            "id": "SP01",
+            "name": "",
+            "price": 1500000,
+            "image": "product1.png",
+            "des": "đẹp"
+        },
+        {
+            "id": "SP02",
+            "name": "",
+            "price": 1500000,
+            "image": "product2.png",
+            "des": "đẹp"
+        },
+        {
+            "id": "SP03",
+            "name": "",
+            "price": 1500000,
+            "image": "product3.png",
+            "des": "đẹp"
+        },
+        {
+            "id": "SP04",
+            "name": "",
+            "price": 1500000,
+            "image": "product4.png",
+            "des": "đẹp"
+        },
+        {
+            "id": "SP05",
+            "name": "",
+            "price": 1500000,
+            "image": "product5.png",
+            "des": "đẹp"
+        },
+        {
+            "id": "SP06",
+            "name": "",
+            "price": 1500000,
+            "image": "product6.png",
+            "des": "đẹp"
+        }
+    ]
+}
