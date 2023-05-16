@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/model/products_model.dart';
+import 'package:intl/intl.dart';
 
 class ProductDetail extends StatefulWidget {
-  const ProductDetail({super.key});
-
+  ProductDetail({super.key, required this.productModel});
+  final ProductModel productModel;
   @override
   State<ProductDetail> createState() => _ProductDetailState();
 }
@@ -15,6 +17,10 @@ class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('SneakerHead'),
+      ),
+      backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.all(15),
         child: SingleChildScrollView(
@@ -22,26 +28,26 @@ class _ProductDetailState extends State<ProductDetail> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/product1.png'),
+              Image.network(widget.productModel.url!),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                'NIKE',
+              Text(
+                widget.productModel.name ?? '',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                'AIR JORDAN 1 RETRO HIGH OG ' '''OBSIDIAN''',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              Text(
+                widget.productModel.description ?? '',
+                style: TextStyle(fontSize: 25),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                '13,000,000 VND',
+              Text(
+                NumberFormat('###,###,###').format(widget.productModel.price),
                 style: TextStyle(fontSize: 18),
               ),
               const SizedBox(
