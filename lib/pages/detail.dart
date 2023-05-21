@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/model/product_viewmodel.dart';
 import 'package:flutter_application/model/products_model.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetail extends StatefulWidget {
   ProductDetail({super.key, required this.productModel});
@@ -70,7 +72,9 @@ class _ProductDetailState extends State<ProductDetail> {
                         dropdownValue = value!;
                       });
                     },
-                    items: list.map<DropdownMenuItem<String>>((String value) {
+                    items:
+                        (widget.productModel.sizes?.map((e) => e.size).toList())
+                            ?.map<DropdownMenuItem<String>>((dynamic value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -82,13 +86,25 @@ class _ProductDetailState extends State<ProductDetail> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 40,
-                child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('ADD TO CART',
-                        style: TextStyle(fontWeight: FontWeight.bold))),
+              Consumer<ProductsVM>(
+                builder: (context, value, child) => InkWell(
+                  onTap: () {
+                    value.add(widget.productModel);
+                  },
+                  child: SizedBox(
+                      width: double.infinity,
+                      height: 40,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: const Center(
+                          child: Text('ADD TO CART',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                      )),
+                ),
               ),
               const SizedBox(
                 height: 10,

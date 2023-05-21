@@ -1,4 +1,4 @@
-class Products {
+class ProductModel {
   String? productId;
   String? categoryId;
   String? name;
@@ -7,42 +7,29 @@ class Products {
   int? availableQuantity;
   String? description;
   String? url;
-  List<Object>? sizes;
-  Products(
-      this.productId,
-      this.categoryId,
-      this.name,
-      this.price,
-      this.quantity,
-      this.availableQuantity,
-      this.description,
-      this.url,
-      this.sizes);
-  factory Products.fromMap(Map<String, dynamic> json) {
-    return Products(
-      json['productId'],
-      json['categoryId'],
-      json['name'],
-      json['price'],
-      json['quantity'],
-      json['availableQuantity'],
-      json['description'],
-      json['url'],
-      json['sizes'],
-    );
-  }
-  factory Products.fromJson(Map<String, dynamic> data) {
-    return Products(
-      data['productId'],
-      data['categoryId'],
-      data['name'],
-      data['price'],
-      data['quantity'],
-      data['availableQuantity'],
-      data['description'],
-      data['url'],
-      data['sizes'],
-    );
+  List<dynamic>? sizes;
+
+  ProductModel(
+      {required this.productId,
+      required this.categoryId,
+      required this.name,
+      required this.price,
+      required this.quantity,
+      required this.availableQuantity,
+      required this.description,
+      required this.url,
+      required this.sizes});
+
+  ProductModel.fromJson(Map<String, dynamic> json) {
+    productId = json['productId'];
+    categoryId = json['categoryId'];
+    name = json['name'];
+    price = json['price'];
+    quantity = json['quantity'];
+    availableQuantity = json['availableQuantity'];
+    description = json['description'];
+    url = json['url'];
+    sizes = (json['size'] as List<dynamic>?)?.cast<String>();
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

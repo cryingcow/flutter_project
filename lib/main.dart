@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/layouts/tabbar.dart';
 import 'package:flutter_application/layouts/drawer.dart';
+import 'package:flutter_application/model/product_viewmodel.dart';
 import 'package:flutter_application/pages/homepage.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,23 +15,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          fontFamily: 'poppins',
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => ProductsVM())],
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            fontFamily: 'poppins',
 
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.orange,
-        ),
-        home: const HomePage());
+            // This is the theme of your application.
+            //
+            // Try running your application with "flutter run". You'll see the
+            // application has a blue toolbar. Then, without quitting the app, try
+            // changing the primarySwatch below to Colors.green and then invoke
+            // "hot reload" (press "r" in the console where you ran "flutter run",
+            // or simply save your changes to "hot reload" in a Flutter IDE).
+            // Notice that the counter didn't reset back to zero; the application
+            // is not restarted.
+            primarySwatch: Colors.orange,
+          ),
+          home: const HomePage()),
+    );
   }
 }
 
