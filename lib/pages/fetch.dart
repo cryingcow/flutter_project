@@ -2,7 +2,6 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'dart:developer';
 
 Future<List<Album>> fetchAlbum() async {
   final response = await http.get(Uri.parse(
@@ -91,8 +90,7 @@ class _FetchState extends State<Fetch> {
               itemBuilder: (context, index) {
                 return ListTile(
                   leading: CircleAvatar(
-                    child: Image.network(
-                        'https://drive.google.com/uc?export=view&id=1wnNmch27QQ3m9jJsRs-ORCzzk4VpOSuD'),
+                    child: Image.network(snapshot.data![index].url.toString()),
                   ),
                   title: Text(snapshot.data![index].name ?? ''),
                   subtitle: Text(snapshot.data![index].quantity.toString()),

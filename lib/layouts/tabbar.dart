@@ -1,12 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/pages/detail.dart';
-import 'package:flutter_application/pages/fetch.dart';
 import 'package:flutter_application/pages/gridproduct.dart';
 import 'package:flutter_application/pages/authpage.dart';
 import 'package:flutter_application/layouts/drawer.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter_application/model/products_model.dart';
 
-class MyTabBar extends StatelessWidget {
+Future<List<ProductModel>> fetchProductModel() async {
+  final response = await http.get(Uri.parse(
+      'http://sneakerhead-production.up.railway.app/products?pageNo=1&pageSize=10'));
+
+  if (response.statusCode == 200) {
+    final List result = json.decode(response.body);
+    return result.map((e) => ProductModel.fromJson(e)).toList();
+  } else {
+    throw Exception('Failed to load data');
+  }
+}
+
+/*class ProductModel {
+  String? productId;
+  String? categoryId;
+  String? name;
+  int? price;
+  int? quantity;
+  int? availableQuantity;
+  String? description;
+  String? url;
+
+  ProductModel({
+    required this.productId,
+    required this.categoryId,
+    required this.name,
+    required this.price,
+    required this.quantity,
+    required this.availableQuantity,
+    required this.description,
+    required this.url,
+  });
+
+  ProductModel.fromJson(Map<String, dynamic> json) {
+    productId = json['productId'];
+    categoryId = json['categoryId'];
+    name = json['name'];
+    price = json['price'];
+    quantity = json['quantity'];
+    availableQuantity = json['availableQuantity'];
+    description = json['description'];
+    url = json['url'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['productId'] = productId;
+    data['categoryId'] = categoryId;
+    data['name'] = name;
+    data['price'] = price;
+    data['quantity'] = quantity;
+    data['availableQuantity'] = availableQuantity;
+    data['description'] = description;
+    data['url'] = url;
+    //data['sizes'] = sizes;
+    return data;
+  }
+}
+*/
+class MyTabBar extends StatefulWidget {
   const MyTabBar({super.key});
+
+  @override
+  State<MyTabBar> createState() => _MyTabBarState();
+}
+
+class _MyTabBarState extends State<MyTabBar> {
+  Future<List<ProductModel>> futureProduct = fetchProductModel();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +87,7 @@ class MyTabBar extends StatelessWidget {
       home: DefaultTabController(
         length: 4,
         child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             title: const Text('SneakerHead'),
           ),
@@ -35,12 +108,12 @@ class MyTabBar extends StatelessWidget {
               Tab(icon: Icon(Icons.perm_contact_cal_outlined)),
             ],
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              GridProduct(),
-              Fetch(),
-              ProductDetail(),
-              Auth(),
+              GridProduct(data: futureProduct),
+              const Auth(),
+              const Auth(),
+              const Auth(),
             ],
           ),
         ),
