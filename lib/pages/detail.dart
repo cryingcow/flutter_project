@@ -30,7 +30,11 @@ class _ProductDetailState extends State<ProductDetail> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(widget.productModel.url!),
+              Card(
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  elevation: 5,
+                  child: Image.network(widget.productModel.url!)),
               const SizedBox(
                 height: 10,
               ),
@@ -87,23 +91,25 @@ class _ProductDetailState extends State<ProductDetail> {
                 height: 10,
               ),
               Consumer<ProductsVM>(
-                builder: (context, value, child) => InkWell(
-                  onTap: () {
-                    value.add(widget.productModel);
-                  },
-                  child: SizedBox(
-                      width: double.infinity,
-                      height: 40,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Center(
-                          child: Text('ADD TO CART',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        ),
-                      )),
+                builder: (context, value, child) => Material(
+                  color: Colors.orange,
+                  child: InkWell(
+                    onTap: () {
+                      value.add(widget.productModel);
+                    },
+                    child: SizedBox(
+                        width: double.infinity,
+                        height: 40,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Center(
+                            child: Text('ADD TO CART',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                        )),
+                  ),
                 ),
               ),
               const SizedBox(

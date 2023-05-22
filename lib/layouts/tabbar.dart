@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/model/favorite_provider.dart';
 import 'package:flutter_application/model/product_viewmodel.dart';
 import 'package:flutter_application/model/products_model.dart';
 import 'package:flutter_application/pages/cart.dart';
 import 'package:flutter_application/pages/detail.dart';
+import 'package:flutter_application/pages/favorite.dart';
 import 'package:flutter_application/pages/gridproduct.dart';
 import 'package:flutter_application/pages/authpage.dart';
 import 'package:flutter_application/layouts/drawer.dart';
@@ -42,7 +44,10 @@ class _MyTabBarState extends State<MyTabBar> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => ProductsVM())],
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProductsVM()),
+        ChangeNotifierProvider(create: (context) => FavoriteProvider()),
+      ],
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.orange),
         home: DefaultTabController(
@@ -72,7 +77,7 @@ class _MyTabBarState extends State<MyTabBar> {
             body: TabBarView(
               children: [
                 GridProduct(data: futureProduct),
-                const Auth(),
+                const MyFavoritePage(),
                 const MyCart(),
                 const Auth(),
               ],

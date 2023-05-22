@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/layouts/tabbar.dart';
 import 'package:flutter_application/layouts/drawer.dart';
+import 'package:flutter_application/model/favorite_provider.dart';
 import 'package:flutter_application/model/product_viewmodel.dart';
 import 'package:flutter_application/pages/homepage.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => ProductsVM())],
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProductsVM(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FavoriteProvider(),
+        )
+      ],
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
