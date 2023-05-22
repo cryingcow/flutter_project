@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => ProductsVM())],
       child: MaterialApp(
@@ -22,6 +23,13 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             scaffoldBackgroundColor: Colors.white,
             fontFamily: 'poppins',
+=======
+    return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          fontFamily: 'poppins',
+>>>>>>> 92b89cf427215a6ab6b2a3c37a90345a710d0aa7
 
             // This is the theme of your application.
             //
