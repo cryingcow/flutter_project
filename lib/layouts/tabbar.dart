@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/model/product_viewmodel.dart';
+import 'package:flutter_application/model/products_model.dart';
 import 'package:flutter_application/pages/cart.dart';
 import 'package:flutter_application/pages/detail.dart';
 import 'package:flutter_application/pages/gridproduct.dart';
@@ -8,10 +9,7 @@ import 'package:flutter_application/layouts/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_application/model/products_model.dart';
-<<<<<<< HEAD
 import 'package:provider/provider.dart';
-=======
->>>>>>> 92b89cf427215a6ab6b2a3c37a90345a710d0aa7
 
 Future<List<ProductModel>> fetchProductModel() async {
   final response = await http.get(Uri.parse(
@@ -19,62 +17,13 @@ Future<List<ProductModel>> fetchProductModel() async {
 
   if (response.statusCode == 200) {
     final List result = json.decode(response.body);
-<<<<<<< HEAD
     print(result);
-=======
->>>>>>> 92b89cf427215a6ab6b2a3c37a90345a710d0aa7
     return result.map((e) => ProductModel.fromJson(e)).toList();
   } else {
     throw Exception('Failed to load data');
   }
 }
 
-/*class ProductModel {
-  String? productId;
-  String? categoryId;
-  String? name;
-  int? price;
-  int? quantity;
-  int? availableQuantity;
-  String? description;
-  String? url;
-
-  ProductModel({
-    required this.productId,
-    required this.categoryId,
-    required this.name,
-    required this.price,
-    required this.quantity,
-    required this.availableQuantity,
-    required this.description,
-    required this.url,
-  });
-
-  ProductModel.fromJson(Map<String, dynamic> json) {
-    productId = json['productId'];
-    categoryId = json['categoryId'];
-    name = json['name'];
-    price = json['price'];
-    quantity = json['quantity'];
-    availableQuantity = json['availableQuantity'];
-    description = json['description'];
-    url = json['url'];
-  }
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['productId'] = productId;
-    data['categoryId'] = categoryId;
-    data['name'] = name;
-    data['price'] = price;
-    data['quantity'] = quantity;
-    data['availableQuantity'] = availableQuantity;
-    data['description'] = description;
-    data['url'] = url;
-    //data['sizes'] = sizes;
-    return data;
-  }
-}
-*/
 class MyTabBar extends StatefulWidget {
   const MyTabBar({super.key});
 
@@ -92,7 +41,6 @@ class _MyTabBarState extends State<MyTabBar> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => ProductsVM())],
       child: MaterialApp(
@@ -129,41 +77,6 @@ class _MyTabBarState extends State<MyTabBar> {
                 const Auth(),
               ],
             ),
-=======
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.orange),
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            title: const Text('SneakerHead'),
-          ),
-          drawer: const SideDrawer(),
-          bottomNavigationBar: const TabBar(
-            labelColor: Color.fromRGBO(255, 137, 6, 1),
-            unselectedLabelColor: Color.fromRGBO(38, 50, 56, 1),
-            indicator: UnderlineTabIndicator(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              borderSide:
-                  BorderSide(color: Color.fromRGBO(255, 137, 6, 1), width: 3.0),
-              insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 40.0),
-            ),
-            tabs: [
-              Tab(icon: Icon(Icons.home_outlined)),
-              Tab(icon: Icon(Icons.favorite_border_sharp)),
-              Tab(icon: Icon(Icons.shopping_bag_outlined)),
-              Tab(icon: Icon(Icons.perm_contact_cal_outlined)),
-            ],
-          ),
-          body: TabBarView(
-            children: [
-              GridProduct(data: futureProduct),
-              const Auth(),
-              const Auth(),
-              const Auth(),
-            ],
->>>>>>> 92b89cf427215a6ab6b2a3c37a90345a710d0aa7
           ),
         ),
       ),
