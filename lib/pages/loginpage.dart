@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,6 +15,34 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _userPasswordController = TextEditingController();
+  login(String usernameoremail, String password) async {
+    Map data = {
+      'usernameOrEmail': usernameoremail,
+      'password': password,
+    };
+    print(data);
+
+    String body = json.encode(data);
+    var url = 'https://sneakerhead-production.up.railway.app/api/auth/signIn';
+    var response = await http.post(
+      Uri.parse(url),
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+    );
+    print(response.body);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      //Or put here your next screen using Navigator.push() method
+      print('success');
+    } else {
+      print('error');
+    }
+  }
+
   @override
   void initState() {
     _passwordVisible = false;
@@ -35,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                    labelText: 'Email Address', icon: Icon(Icons.email)),
+                    labelText: 'username or email', icon: Icon(Icons.email)),
               ),
               const SizedBox(
                 height: 20,
@@ -78,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               TextButton(
-                  onPressed: onPressed,
+                  onPressed: () {},
                   child: Text(
                     'Forgot password',
                     style: TextStyle(color: Colors.black),
@@ -90,7 +120,10 @@ class _LoginPageState extends State<LoginPage> {
                 width: 130,
                 height: 50,
                 child: FilledButton(
-                    onPressed: onPressed,
+                    onPressed: () {
+                      login(
+                          _emailController.text, _userPasswordController.text);
+                    },
                     child: Text(
                       'Login',
                       style: TextStyle(color: Colors.white),
@@ -102,6 +135,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  void onPressed() {}
 }

@@ -19,7 +19,6 @@ Future<List<ProductModel>> fetchProductModel() async {
 
   if (response.statusCode == 200) {
     final List result = json.decode(response.body);
-    print(result);
     return result.map((e) => ProductModel.fromJson(e)).toList();
   } else {
     throw Exception('Failed to load data');

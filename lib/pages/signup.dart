@@ -1,63 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-/*Future<User> createUser(String name, String username, String email,
-    String password, String cellphone, String address) async {
-  final response = await http.post(
-    Uri.parse('https://sneakerhead-production.up.railway.app/api/auth/signUp'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      'name': name,
-      'username': username,
-      'email': email,
-      'password': password,
-      'cellphone': cellphone,
-      'address': address,
-    }),
-  );
-  if (response.statusCode == 201) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    return User.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    throw Exception('Failed to create album.');
-  }
-}
-
-class User {
-  final String name;
-  final String username;
-  final String email;
-  final String password;
-  final String cellphone;
-  final String address;
-
-  const User(
-      {required this.name,
-      required this.username,
-      required this.email,
-      required this.password,
-      required this.cellphone,
-      required this.address});
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      name: json['name'],
-      username: json['username'],
-      email: json['email'],
-      password: json['password'],
-      cellphone: json['cellphone'],
-      address: json['address'],
-    );
-  }
-}
-*/
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
@@ -73,6 +17,39 @@ class _SignUpState extends State<SignUp> {
   final _userPasswordController = TextEditingController();
   final _addressController = TextEditingController();
   late bool _passwordVisible;
+  register(String name, String username, String email, String password,
+      String cellphone, String address) async {
+    Map data = {
+      'name': name,
+      'username': username,
+      'email': email,
+      'password': password,
+      'cellphone': cellphone,
+      'address': address,
+    };
+    print(data);
+
+    String body = json.encode(data);
+    var url = 'https://sneakerhead-production.up.railway.app/api/auth/signUp';
+    var response = await http.post(
+      Uri.parse(url),
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+    );
+    print(response.body);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      //Or put here your next screen using Navigator.push() method
+      print('success');
+    } else {
+      print('error');
+    }
+  }
+
   //Future<User>? _futureUser;
   @override
   void initState() {
@@ -173,7 +150,15 @@ class _SignUpState extends State<SignUp> {
                 width: 130,
                 height: 50,
                 child: FilledButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      register(
+                          _nameController.text,
+                          _usernameController.text,
+                          _emailController.text,
+                          _userPasswordController.text,
+                          _phoneController.text,
+                          _addressController.text);
+                    },
                     child: const Text(
                       'Create',
                       style: TextStyle(color: Colors.white),
