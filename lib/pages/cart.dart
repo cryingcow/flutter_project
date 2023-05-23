@@ -20,10 +20,10 @@ class _MyCartState extends State<MyCart> {
           child: Container(
             width: double.infinity,
             child: Column(children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "Cart",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -60,7 +60,7 @@ Widget itemListView(ProductModel productModel, index) {
               width: 80,
               errorBuilder: (context, error, StackTrace) => Icon(Icons.image),
             ),
-            SizedBox(
+            const SizedBox(
               width: 30,
             ),
             Flexible(
@@ -89,7 +89,7 @@ Widget itemListView(ProductModel productModel, index) {
                       onTap: () {
                         value.del(index);
                       },
-                      child: SizedBox(
+                      child: const SizedBox(
                         width: 50,
                         child: Icon(
                           Icons.delete_outline,

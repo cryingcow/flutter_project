@@ -53,7 +53,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 height: 10,
               ),
               Text(
-                NumberFormat('###,###,###').format(widget.productModel.price),
+                NumberFormat('###,###,###' + "VNĐ")
+                    .format(widget.productModel.price),
                 style: TextStyle(fontSize: 18),
               ),
               const SizedBox(
@@ -115,15 +116,28 @@ class _ProductDetailState extends State<ProductDetail> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                  width: double.infinity,
-                  height: 40,
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'ADD TO WISHLIST',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ))),
+              Consumer<ProductsVM>(
+                builder: (context, value, child) => Material(
+                  color: Colors.orange,
+                  child: InkWell(
+                    onTap: () {
+                      //value.add(widget.productModel);
+                    },
+                    child: SizedBox(
+                        width: double.infinity,
+                        height: 40,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Center(
+                            child: Text('PURCHASE',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                        )),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

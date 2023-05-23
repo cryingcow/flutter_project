@@ -1,5 +1,3 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/model/favorite_provider.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +21,7 @@ class MyFavoritePage extends StatelessWidget {
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 elevation: 5,
                 child: Container(
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   margin: EdgeInsets.symmetric(vertical: 5),
                   decoration: BoxDecoration(color: Colors.grey.shade100),
                   child: Row(
@@ -63,7 +61,7 @@ class MyFavoritePage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 50,
+                        width: 80,
                         child: IconButton(
                           onPressed: () {
                             provider.toggleFavorite(productmodel);
