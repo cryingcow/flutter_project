@@ -17,7 +17,7 @@ class _AuthState extends State<Auth> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Center(
-            child: const Text(
+            child: Text(
               'You have to login to see this',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
@@ -46,15 +46,16 @@ class _AuthState extends State<Auth> {
                                         MediaQuery.of(context).size.height;
                                     var width =
                                         MediaQuery.of(context).size.width;
-                                    return Container(
+                                    return SizedBox(
                                         height: height + 200,
                                         width: width + 300,
-                                        child: LoginPage());
+                                        child: const LoginPage());
                                   },
                                 ),
                               ));
                     },
-                    child: Text("Login", style: TextStyle(color: Colors.white)),
+                    child: const Text("Login",
+                        style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ),
@@ -89,8 +90,8 @@ class _AuthState extends State<Auth> {
                                 ),
                               ));
                     },
-                    child:
-                        Text("Register", style: TextStyle(color: Colors.white)),
+                    child: const Text("Register",
+                        style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ),

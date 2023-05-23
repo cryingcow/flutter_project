@@ -3,14 +3,12 @@ import 'package:flutter_application/model/favorite_provider.dart';
 import 'package:flutter_application/model/product_viewmodel.dart';
 import 'package:flutter_application/model/products_model.dart';
 import 'package:flutter_application/pages/cart.dart';
-import 'package:flutter_application/pages/detail.dart';
 import 'package:flutter_application/pages/favorite.dart';
 import 'package:flutter_application/pages/gridproduct.dart';
 import 'package:flutter_application/pages/authpage.dart';
 import 'package:flutter_application/layouts/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_application/model/products_model.dart';
 import 'package:provider/provider.dart';
 
 Future<List<ProductModel>> fetchProductModel() async {

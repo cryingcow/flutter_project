@@ -9,23 +9,6 @@ class GridProduct extends StatelessWidget {
   final Future<List<ProductModel>> data;
   const GridProduct({super.key, required this.data});
 
-/*  @override
-  State<GridProduct> createState() => _GridProductState();
-}
-
-class _GridProductState extends State<GridProduct> {
-  List<ProductModel> listProduct = [];
-  late Future<List<ProductModel>> data;
-  Future<String> loadList() async {
-    listProduct = await ReadData().loadData();
-    return '';
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ProductModel>>(

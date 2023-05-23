@@ -2,6 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+class DataResponse {
+  final String message;
+  final String status;
+
+  const DataResponse({
+    required this.message,
+    required this.status,
+  });
+
+  factory DataResponse.fromJson(Map<String, dynamic> json) {
+    return DataResponse(
+      message: json['message'],
+      status: json['status'],
+    );
+  }
+}
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -20,7 +37,6 @@ class _LoginPageState extends State<LoginPage> {
       'usernameOrEmail': usernameoremail,
       'password': password,
     };
-    print(data);
 
     String body = json.encode(data);
     var url = 'https://sneakerhead-production.up.railway.app/api/auth/signIn';
@@ -33,10 +49,18 @@ class _LoginPageState extends State<LoginPage> {
         "Access-Control-Allow-Origin": "*"
       },
     );
-    print(response.body);
-    print(response.statusCode);
+    final dataresponse = DataResponse.fromJson(jsonDecode(response.body));
     if (response.statusCode == 200) {
       //Or put here your next screen using Navigator.push() method
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(dataresponse.message),
+            );
+          });
+
       print('success');
     } else {
       print('error');

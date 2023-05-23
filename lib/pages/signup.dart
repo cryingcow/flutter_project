@@ -2,6 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+class DataResponse {
+  final String message;
+  final String status;
+
+  const DataResponse({
+    required this.message,
+    required this.status,
+  });
+
+  factory DataResponse.fromJson(Map<String, dynamic> json) {
+    return DataResponse(
+      message: json['message'],
+      status: json['status'],
+    );
+  }
+}
+
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
@@ -17,6 +34,7 @@ class _SignUpState extends State<SignUp> {
   final _userPasswordController = TextEditingController();
   final _addressController = TextEditingController();
   late bool _passwordVisible;
+
   register(String name, String username, String email, String password,
       String cellphone, String address) async {
     Map data = {
@@ -40,11 +58,17 @@ class _SignUpState extends State<SignUp> {
         "Access-Control-Allow-Origin": "*"
       },
     );
-    print(response.body);
-    print(response.statusCode);
+    final dataresponse = DataResponse.fromJson(jsonDecode(response.body));
     if (response.statusCode == 200) {
       //Or put here your next screen using Navigator.push() method
-      print('success');
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(dataresponse.message),
+            );
+          });
+      print(dataresponse.message);
     } else {
       print('error');
     }
