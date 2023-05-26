@@ -6,7 +6,6 @@ import 'package:flutter_application/pages/cart.dart';
 import 'package:flutter_application/pages/favorite.dart';
 import 'package:flutter_application/pages/gridproduct.dart';
 import 'package:flutter_application/pages/authpage.dart';
-import 'package:flutter_application/layouts/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
@@ -17,6 +16,7 @@ Future<List<ProductModel>> fetchProductModel() async {
 
   if (response.statusCode == 200) {
     final List result = json.decode(response.body);
+    print(result);
     return result.map((e) => ProductModel.fromJson(e)).toList();
   } else {
     throw Exception('Failed to load data');
@@ -51,10 +51,6 @@ class _MyTabBarState extends State<MyTabBar> {
           length: 4,
           child: Scaffold(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              title: const Text('SneakerHead'),
-            ),
-            drawer: const SideDrawer(),
             bottomNavigationBar: const TabBar(
               labelColor: Color.fromRGBO(255, 137, 6, 1),
               unselectedLabelColor: Color.fromRGBO(38, 50, 56, 1),

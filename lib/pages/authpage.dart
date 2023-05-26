@@ -13,6 +13,7 @@ class _AuthState extends State<Auth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('User information')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

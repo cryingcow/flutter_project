@@ -77,9 +77,10 @@ class _ProductDetailState extends State<ProductDetail> {
                         dropdownValue = value!;
                       });
                     },
-                    items:
-                        (widget.productModel.sizes?.map((e) => e.size).toList())
-                            ?.map<DropdownMenuItem<String>>((dynamic value) {
+                    items: widget.productModel.sizes
+                        ?.map((e) => e.size)
+                        .toList()
+                        .map<DropdownMenuItem<String>>((dynamic value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),

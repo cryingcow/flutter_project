@@ -16,23 +16,19 @@ class _MyCartState extends State<MyCart> {
   Widget build(BuildContext context) {
     return Consumer<ProductsVM>(
       builder: (context, value, child) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Cart'),
+        ),
         body: SafeArea(
           child: Container(
             width: double.infinity,
             child: Column(children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Cart",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
               Expanded(
                   child: ListView.builder(
                       itemCount: value.lst.length,
                       itemBuilder: ((context, index) {
                         return itemListView(value.lst[index], index);
-                      })))
+                      }))),
             ]),
           ),
         ),

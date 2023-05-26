@@ -16,39 +16,44 @@ class GridProduct extends StatelessWidget {
         future: data,
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
-            return Container(
-              padding: const EdgeInsets.all(20),
-              child: Center(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      slide(snapshot.data!),
-                      const Text(
-                        "HOME",
-                        style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'poppins'),
-                      ),
-                      Expanded(
-                          child: GridView.builder(
-                              gridDelegate:
-                                  const SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent: 300,
-                                      childAspectRatio: 1,
-                                      crossAxisSpacing: 15,
-                                      mainAxisSpacing: 15),
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                return itemGridView(
-                                    snapshot.data![index], context);
-                              }))
-                    ]),
+            return Scaffold(
+              appBar: AppBar(title: const Text('Home')),
+              body: Container(
+                padding: const EdgeInsets.all(20),
+                child: Center(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        slide(snapshot.data!),
+                        const Text(
+                          "HOME",
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'poppins'),
+                        ),
+                        Expanded(
+                            child: GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                        maxCrossAxisExtent: 300,
+                                        childAspectRatio: 1,
+                                        crossAxisSpacing: 15,
+                                        mainAxisSpacing: 15),
+                                itemCount: snapshot.data!.length,
+                                itemBuilder: (context, index) {
+                                  return itemGridView(
+                                      snapshot.data![index], context);
+                                }))
+                      ]),
+                ),
               ),
             );
           }
           ;
-          return const CircularProgressIndicator();
+          return Scaffold(
+              appBar: AppBar(title: const Text('Home')),
+              body: Center(child: CircularProgressIndicator()));
         });
   }
 

@@ -90,9 +90,12 @@ class _SignUpState extends State<SignUp> {
             child: Column(children: [
               const Center(
                 child: Text(
-                  'User Information',
+                  'Register',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
+              ),
+              const SizedBox(
+                height: 80,
               ),
               TextFormField(
                 controller: _nameController,

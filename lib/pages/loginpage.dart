@@ -76,20 +76,23 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child: Center(
           child: SingleChildScrollView(
             child: Column(children: [
               const Center(
-                child: const Text(
+                child: Text(
                   'Login',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
+              const SizedBox(
+                height: 80,
+              ),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                    labelText: 'username or email', icon: Icon(Icons.email)),
+                    labelText: 'Username', icon: Icon(Icons.email)),
               ),
               const SizedBox(
                 height: 20,
@@ -124,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     'Dont have an account ?',
                     style: TextStyle(color: Colors.black),
                   )),
@@ -133,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     'Forgot password',
                     style: TextStyle(color: Colors.black),
                   )),
@@ -148,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                       login(
                           _emailController.text, _userPasswordController.text);
                     },
-                    child: Text(
+                    child: const Text(
                       'Login',
                       style: TextStyle(color: Colors.white),
                     )),
